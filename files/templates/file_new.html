@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load cloudinary %}
+    {% block newdeveloper %}
+        <h1>New developer</h1>
+         <form enctype=multipart/form-data method="POST" class="file-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    {% endblock %}

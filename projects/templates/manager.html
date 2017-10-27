@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+    {% block newproject %}
+        <h1>New manager</h1>
+         <form method="POST" class="manager-form">{% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="save btn btn-default">Save</button>
+        </form>
+    {% endblock %}

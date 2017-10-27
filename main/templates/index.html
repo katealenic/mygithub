@@ -1,0 +1,29 @@
+ {% extends "base.html" %}
+
+ {% block content %}
+{% if username != "" %}
+<div style="width: 400px; height: 600px; float: left; ">
+
+{% for news in news_list %}
+    <ul></ul>
+    <blockquote style=" background: powderblue">
+     {{ news.title }}
+     <ul></ul>
+    <div style="width: 400px;"> {{ news.body }}</div>
+    Author: {{ news.author }}
+    {% for g in grup %}
+     {% if g.name == "manager" or g.name == "admin" %}
+    <div style="float: right"><a href="{% url 'index' pk=news.pk%}" class="top-menu"><span class="glyphicon glyphicon-minus"></span></a></div>
+        {% endif %}
+        </blockquote>
+     {% endfor %}
+
+{% endfor %}
+</div>
+     {% for g in grup %}
+     {% if g.name == "manager" or g.name == "admin" %}
+     <div style="float: right"><a href="{% url 'new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a></div>
+       {% endif %}
+     {% endfor %}
+     {% endif %}
+ {% endblock %}

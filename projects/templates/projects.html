@@ -1,0 +1,81 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+
+{% block projects %}
+    <link href="{% static 'css/page.css' %}" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<div class="container" id="project" style="width: 700px; height: 400px; float: left">
+	<div class="row">
+        <div class="col-md-7" style="width: 650px; height: 600px;">
+
+<div class="panel panel-default" >
+  <div class="panel-heading">  <h4 >Projects</h4></div>
+   <div class="panel-body">
+
+    <div class="box box-info">
+
+        <div class="container" style="width: 600px;">
+<table id="table" class="table">
+    <thead>
+        <tr>
+          {#    <th>Status</th>#}
+            <th>Name</th>
+            <th>Data</th>
+            {% for g in grup %}
+            {% if g.name == "manager" or g.name == "admin" %}
+            <th>Delete</th>
+            {% endif %}
+            {% endfor %}
+
+        </tr>
+        {% for p in project %}
+        <tr>
+        {% for g in grup %}
+        {% if g.name == "manager" or g.name == "admin" or g.name == "developer" %}
+            <th><a href="/developer/{{ p.get_absolute_url  }}">{{ p.title }}</a></th>
+        {% else %}
+            <th>{{ p.title }}</th>
+        {% endif %}
+            {% endfor %}
+        {% if username == "" %}
+            <th>{{ p.title }}</th>
+        {% endif %}
+            <th>{{ p.publish }}</th>
+          {#  <th><div><a href="/project_del/{{ p.get_absolute_url  }}"  class="top-menu"><span class="glyphicon glyphicon-minus"></span></a></div></th> #}
+            {% for g in grup %}
+            {% if g.name == "manager" or g.name == "admin" %}
+             <th><a href="{% url 'project_del' pk=p.pk %}" class="top-menu"><span class="glyphicon glyphicon-minus"></span></a></th>
+                {% endif %}
+                {% endfor %}
+
+        </tr>
+    {% endfor %}
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+             {% for g in grup %}
+            {% if g.name == "manager" or g.name == "admin" %}
+        <div><a href="{% url 'project_new'%}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a></div>
+            {% endif %}
+             {% if g.name == "admin" %}
+    <div style="float: right"><a href="{% url 'manager_new'%}" class="top-menu"><span class="glyphicon glyphicon-plus">Add manager</span></a></div>
+       {% endif %}
+        {% endfor %}
+        </div>
+
+            <!-- /.box-body -->
+          </div>
+          <!-- /.box -->
+        </div>
+    </div>
+    </div>
+</div>
+
+</div>
+
+{% endblock %}
+

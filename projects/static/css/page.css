@@ -1,0 +1,10 @@
+input.hidden {
+    position: absolute;
+    left: -9999px;
+}
+
+#project{
+width:400px;
+height:200px;
+float:left;
+}

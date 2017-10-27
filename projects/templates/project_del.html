@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+    {% block newproject %}
+        <form method="POST" class="project-form">{% csrf_token %}
+            <div type="submit" class="deletelink btn btn-default">Delete {{ object.title }}</div>
+        </form>
+    {% endblock %}
